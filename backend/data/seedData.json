@@ -1,0 +1,30 @@
+{
+  "patients": [
+    {
+      "fullName": "John Doe",
+      "email": "johndoe@example.com",
+      "phone": "+15551234567",
+      "age": 34,
+      "gender": "Male",
+      "address": "123 Dental Street",
+      "doctorType": "General",
+      "symptoms": "Toothache",
+      "medicalHistory": "None"
+    }
+  ],
+  "messages": [
+    {
+      "name": "Visitor One",
+      "email": "visitor1@example.com",
+      "phone": "",
+      "subject": "General question",
+      "message": "Hi, do you accept walk-ins?"
+    }
+  ],
+  "appointments": [
+    {
+      "reasonForVisit": "Checkup",
+      "status": "Pending"
+    }
+  ]
+}
