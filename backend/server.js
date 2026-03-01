@@ -105,7 +105,7 @@ const connectDB = async () => {
     console.log(`  URI: ${mongoURI}`);
   } catch (error) {
     console.error('✗ MongoDB Connection Error:', error.message);
-    process.exit(1);
+    // process.exit(1); // Exiting the process is not ideal for serverless functions
   }
 };
 
