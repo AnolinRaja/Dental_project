@@ -50,7 +50,14 @@ const authLimiter = rateLimit({
 // ========================
 // Middleware
 // ========================
-app.use(cors());
+const cors = require("cors");
+
+app.use(
+  cors({
+    origin: process.env.FRONTEND_URL,
+    credentials: true,
+  })
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan('combined'));
