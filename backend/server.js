@@ -157,15 +157,19 @@ app.use((err, req, res, next) => {
 // ========================
 // Server Start
 // ========================
-app.listen(PORT, '0.0.0.0', () => {
-  console.log('\n╔════════════════════════════════════════╗');
-  console.log('║  Dental Clinic Management - Backend   ║');
-  console.log('╚════════════════════════════════════════╝');
-  console.log(`✓ Server running on: http://0.0.0.0:${PORT}`);
-  console.log(`✓ Environment: ${process.env.NODE_ENV || 'development'}`);
-  console.log(`✓ API Health: http://localhost:${PORT}/api/health`);
-  console.log(`✓ Uploads folder: ${uploadsDir}`);
-  console.log('');
-});
+// app.listen(PORT, '0.0.0.0', () => {
+//   console.log('\n╔════════════════════════════════════════╗');
+//   console.log('║  Dental Clinic Management - Backend   ║');
+//   console.log('╚════════════════════════════════════════╝');
+//   console.log(`✓ Server running on: http://0.0.0.0:${PORT}`);
+//   console.log(`✓ Environment: ${process.env.NODE_ENV || 'development'}`);
+//   console.log(`✓ API Health: http://localhost:${PORT}/api/health`);
+//   console.log(`✓ Uploads folder: ${uploadsDir}`);
+//   console.log('');
+// });
+
+const serverless = require("serverless-http");
+
+module.exports = serverless(app);
 
 module.exports = app;
