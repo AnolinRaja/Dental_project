@@ -5,7 +5,7 @@ import toast from 'react-hot-toast';
 import PatientInvoices from '../components/PatientInvoices';
 import ReviewForm from '../components/ReviewForm';
 
-const API_URL = '/api';
+const API_URL = process.env.REACT_APP_API_URL;
 
 const PatientDashboard = () => {
   const navigate = useNavigate();

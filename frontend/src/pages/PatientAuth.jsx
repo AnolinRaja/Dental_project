@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import axios from 'axios';
 
-const API_URL = '/api';
+const API_URL = process.env.REACT_APP_API_URL;
 
 const PatientAuth = () => {
   const navigate = useNavigate();
