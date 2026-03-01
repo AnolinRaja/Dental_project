@@ -8,7 +8,9 @@ const router = express.Router();
 // Multer storage for payment proof photos
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, path.join(__dirname, '../uploads/payment-proofs'));
+    const uploadPath = '/tmp/uploads/payment-proofs';
+    require('fs').mkdirSync(uploadPath, { recursive: true });
+    cb(null, uploadPath);
   },
   filename: (req, file, cb) => {
     const timestamp = Date.now();

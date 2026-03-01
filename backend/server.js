@@ -79,14 +79,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan('combined'));
 
-// Static files for uploads
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+// Static files for uploads from the /tmp directory
+app.use('/uploads', express.static('/tmp/uploads'));
 
-// Ensure uploads folder exists
-const uploadsDir = path.join(__dirname, 'uploads');
+// Ensure uploads folder exists in /tmp
+const uploadsDir = path.join('/tmp', 'uploads');
 if (!fs.existsSync(uploadsDir)) {
   fs.mkdirSync(uploadsDir, { recursive: true });
-  console.log('✓ Uploads directory created');
+  console.log('✓ Uploads directory created in /tmp');
 }
 
 // ========================

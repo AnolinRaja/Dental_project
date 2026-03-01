@@ -9,7 +9,9 @@ const router = express.Router();
 // Configure multer for file uploads
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, path.join(__dirname, '../uploads/qrcodes'));
+    const uploadPath = '/tmp/uploads/qrcodes';
+    require('fs').mkdirSync(uploadPath, { recursive: true });
+    cb(null, uploadPath);
   },
   filename: (req, file, cb) => {
     cb(null, `qr_${req.doctorEmail}_${Date.now()}${path.extname(file.originalname)}`);
