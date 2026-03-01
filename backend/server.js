@@ -50,11 +50,28 @@ const authLimiter = rateLimit({
 // ========================
 // Middleware
 // ========================
-const cors = require("cors");
+const allowedOrigins = [
+  process.env.FRONTEND_URL, // Production frontend
+  'http://localhost:3000',     // Local development
+];
 
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL,
+    origin: function (origin, callback) {
+      // allow requests with no origin (like mobile apps or curl requests)
+      if (!origin) return callback(null, true);
+      
+      // Allow vercel preview deployments
+      if (/\.vercel\.app$/.test(origin)) {
+        return callback(null, true);
+      }
+
+      if (allowedOrigins.indexOf(origin) === -1) {
+        const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+        return callback(new Error(msg), false);
+      }
+      return callback(null, true);
+    },
     credentials: true,
   })
 );
@@ -157,18 +174,18 @@ app.use((err, req, res, next) => {
 // ========================
 // Server Start
 // ========================
-// app.listen(PORT, '0.0.0.0', () => {
-//   console.log('\n╔════════════════════════════════════════╗');
-//   console.log('║  Dental Clinic Management - Backend   ║');
-//   console.log('╚════════════════════════════════════════╝');
-//   console.log(`✓ Server running on: http://0.0.0.0:${PORT}`);
-//   console.log(`✓ Environment: ${process.env.NODE_ENV || 'development'}`);
-//   console.log(`✓ API Health: http://localhost:${PORT}/api/health`);
-//   console.log(`✓ Uploads folder: ${uploadsDir}`);
-//   console.log('');
-// });
+if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
+  app.listen(PORT, '0.0.0.0', () => {
+    console.log('\n╔════════════════════════════════════════╗');
+    console.log('║  Dental Clinic Management - Backend   ║');
+    console.log('╚════════════════════════════════════════╝');
+    console.log(`✓ Server running on: http://0.0.0.0:${PORT}`);
+    console.log(`✓ Environment: ${process.env.NODE_ENV || 'development'}`);
+    console.log(`✓ API Health: http://localhost:${PORT}/api/health`);
+    console.log(`✓ Uploads folder: ${uploadsDir}`);
+    console.log('');
+  });
+}
 
-const serverless = require("serverless-http");
-
-module.exports.handler = serverless(app);
+module.exports = app;
 

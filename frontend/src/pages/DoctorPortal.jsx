@@ -7,7 +7,7 @@ import DoctorAnalytics from '../components/DoctorAnalytics';
 import DoctorProfile from '../components/DoctorProfile';
 
 // allow API to resolve relative to host when working over LAN
-const API_URL = process.env.REACT_APP_API_URL || `${window.location.protocol}//${window.location.hostname}:5000/api`;
+const API_URL = '/api';
 
 const DoctorPortal = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);

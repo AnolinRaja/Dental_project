@@ -5,7 +5,7 @@ import axios from 'axios';
 
 // when accessed from other devices the backend may not be on localhost
 // use the current hostname with port 5000 if no env variable is provided
-const API_URL = process.env.REACT_APP_API_URL || `${window.location.protocol}//${window.location.hostname}:5000/api`; // example: http://192.168.0.104:5000/api
+const API_URL = '/api';
 
 const RegistrationForm = () => {
   const navigate = useNavigate();

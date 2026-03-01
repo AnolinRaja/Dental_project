@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import axios from 'axios';
 
-const API_URL = process.env.REACT_APP_API_URL || `${window.location.protocol}//${window.location.hostname}:5000/api`; // ensures mobile devices use correct backend address
+const API_URL = '/api';
 
 const DoctorLogin = ({ onLoginSuccess }) => {
   const [formData, setFormData] = useState({
