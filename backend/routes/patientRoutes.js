@@ -29,6 +29,7 @@ const requirePatientToken = (req, res, next) => {
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     console.log('🔐 [AUTH-MIDDLEWARE] Token verified, patientId:', decoded.patientId);
+    console.log('🔐 [AUTH-MIDDLEWARE] Decoded token:', decoded);
     req.patientId = decoded.patientId;
     req.patientEmail = decoded.email;
     next();
@@ -392,6 +393,7 @@ router.get('/my-appointments', requirePatientToken, async (req, res) => {
       });
     }
 
+    console.log('📋 [MY-APPOINTMENTS] Decoded patientId:', req.patientId);
     console.log('📋 [MY-APPOINTMENTS] Querying database...');
     const appointments = await Appointment.find({ patientId: req.patientId }).sort({ appointmentDate: -1 });
     
