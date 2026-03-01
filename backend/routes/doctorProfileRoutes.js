@@ -1,8 +1,8 @@
-const express = require('express');
-const jwt = require('jsonwebtoken');
-const DoctorProfile = require('../models/DoctorProfile');
-const multer = require('multer');
-const path = require('path');
+import express from 'express';
+import jwt from 'jsonwebtoken';
+import DoctorProfile from '../models/DoctorProfile.js';
+import multer from 'multer';
+import path from 'path';
 
 const router = express.Router();
 
@@ -148,4 +148,4 @@ router.post('/upload-qr', requireDoctorToken, upload.single('qrCode'), async (re
   }
 });
 
-module.exports = router;
+export default router;

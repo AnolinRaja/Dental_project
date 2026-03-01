@@ -1,9 +1,9 @@
-const express = require('express');
-const jwt = require('jsonwebtoken');
-const Appointment = require('../models/Appointment');
-const Patient = require('../models/Patient');
-const DoctorOtp = require('../models/DoctorOtp');
-const { sendAppointmentConfirmedEmail, sendAppointmentRejectedEmail, sendDoctorOtpEmail } = require('../utils/sendEmail');
+import express from 'express';
+import jwt from 'jsonwebtoken';
+import Appointment from '../models/Appointment.js';
+import Patient from '../models/Patient.js';
+import DoctorOtp from '../models/DoctorOtp.js';
+import { sendAppointmentConfirmedEmail, sendAppointmentRejectedEmail, sendDoctorOtpEmail } from '../utils/sendEmail.js';
 
 const router = express.Router();
 
@@ -369,4 +369,4 @@ router.put('/complete-appointment/:appointmentId', async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

@@ -1,7 +1,7 @@
-const express = require('express');
-const jwt = require('jsonwebtoken');
-const Invoice = require('../models/Invoice');
-const Patient = require('../models/Patient');
+import express from 'express';
+import jwt from 'jsonwebtoken';
+import Invoice from '../models/Invoice.js';
+import Patient from '../models/Patient.js';
 
 const router = express.Router();
 
@@ -94,4 +94,4 @@ router.put('/:id', requireDoctorToken, async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

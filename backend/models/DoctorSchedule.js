@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const DoctorScheduleSchema = new mongoose.Schema({
   dayOfWeek: { type: String, enum: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'], required: true },
@@ -8,4 +8,5 @@ const DoctorScheduleSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now }
 });
 
-module.exports = mongoose.model('DoctorSchedule', DoctorScheduleSchema);
+const DoctorSchedule = mongoose.model('DoctorSchedule', DoctorScheduleSchema);
+export default DoctorSchedule;

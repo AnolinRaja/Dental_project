@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const InvoiceSchema = new mongoose.Schema({
   patientId: { type: mongoose.Schema.Types.ObjectId, ref: 'Patient', required: true },
@@ -17,9 +17,8 @@ const InvoiceSchema = new mongoose.Schema({
   total: { type: Number, required: true },
   status: { type: String, enum: ['Pending', 'Paid', 'Overdue'], default: 'Pending' },
   dueDate: { type: Date },
-  paidDate: { type: Date },
-  notes: String,
-  createdAt: { type: Date, default: Date.now }
+  paidDate: { type: Date }
 });
 
-module.exports = mongoose.model('Invoice', InvoiceSchema);
+const Invoice = mongoose.model('Invoice', InvoiceSchema);
+export default Invoice;

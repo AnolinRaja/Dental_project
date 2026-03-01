@@ -1,14 +1,14 @@
-const express = require('express');
-const jwt = require('jsonwebtoken');
-const { v4: uuidv4 } = require('uuid');
-const multer = require('multer');
-const path = require('path');
-const Patient = require('../models/Patient');
-const Appointment = require('../models/Appointment');
-const {
+import express from 'express';
+import jwt from 'jsonwebtoken';
+import { v4 as uuidv4 } from 'uuid';
+import multer from 'multer';
+import path from 'path';
+import Patient from '../models/Patient.js';
+import Appointment from '../models/Appointment.js';
+import {
   sendPatientConfirmationEmail,
   sendDoctorNotificationEmail
-} = require('../utils/sendEmail');
+} from '../utils/sendEmail.js';
 
 const router = express.Router();
 
@@ -30,8 +30,16 @@ const requirePatientToken = (req, res, next) => {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     console.log('🔐 [AUTH-MIDDLEWARE] Token verified, patientId:', decoded.patientId);
     console.log('🔐 [AUTH-MIDDLEWARE] Decoded token:', decoded);
+    if (!mongoose.Types.ObjectId.isValid(decoded.patientId)) {
+      console.log('🔐 [AUTH-MIDDLEWARE] ERROR: Invalid patientId in token');
+      return res.status(400).json({
+        success: false,
+        message: 'Invalid patient ID in token'
+      });
+    }
     req.patientId = decoded.patientId;
     req.patientEmail = decoded.email;
+    console.log('🔐 [AUTH-MIDDLEWARE] Patient ID and email set:', req.patientId, req.patientEmail);
     next();
   } catch (error) {
     console.error('🔐 [AUTH-MIDDLEWARE] ERROR:', error.message);
@@ -393,6 +401,14 @@ router.get('/my-appointments', requirePatientToken, async (req, res) => {
       });
     }
 
+    if (!mongoose.Types.ObjectId.isValid(req.patientId)) {
+      console.log('📋 [MY-APPOINTMENTS] ERROR: Invalid patientId format');
+      return res.status(400).json({
+        success: false,
+        message: 'Invalid patient ID format'
+      });
+    }
+
     console.log('📋 [MY-APPOINTMENTS] Decoded patientId:', req.patientId);
     console.log('📋 [MY-APPOINTMENTS] Querying database...');
     const appointments = await Appointment.find({ patientId: req.patientId }).sort({ appointmentDate: -1 });
@@ -423,4 +439,4 @@ router.get('/my-appointments', requirePatientToken, async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

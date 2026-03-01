@@ -1,4 +1,4 @@
-const nodemailer = require('nodemailer');
+import nodemailer from 'nodemailer';
 
 // utility to convert time string (HH:MM) to 12-hour format with AM/PM
 function formatTo12Hour(timeStr) {
@@ -403,8 +403,7 @@ const sendPatientOtpEmail = async (toEmail, otp) => {
   }
 };
 
-// Export all email helpers
-module.exports = {
+export {
   sendPatientConfirmationEmail,
   sendDoctorNotificationEmail,
   sendAppointmentConfirmedEmail,

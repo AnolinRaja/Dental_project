@@ -1,6 +1,6 @@
-const express = require('express');
-const jwt = require('jsonwebtoken');
-const DoctorSchedule = require('../models/DoctorSchedule');
+import express from 'express';
+import jwt from 'jsonwebtoken';
+import DoctorSchedule from '../models/DoctorSchedule.js';
 
 const router = express.Router();
 
@@ -8,20 +8,20 @@ const router = express.Router();
 const requireDoctorToken = (req, res, next) => {
   const authHeader = req.headers.authorization;
   const token = authHeader?.split(' ')[1];
-  
+
   if (!token) {
     console.log('❌ No token provided in Authorization header');
     return res.status(401).json({ success: false, message: 'No token provided' });
   }
-  
+
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     console.log('✓ Token verified for:', decoded.email);
     req.doctorEmail = decoded.email;
     next();
-  } catch (err) {
-    console.error('❌ Token verification failed:', err.message);
-    res.status(401).json({ success: false, message: 'Invalid or expired token', error: err.message });
+  } catch (error) {
+    console.error('❌ Token verification failed:', error.message);
+    res.status(401).json({ success: false, message: 'Invalid or expired token', error: error.message });
   }
 };
 
@@ -74,4 +74,4 @@ router.post('/', requireDoctorToken, async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

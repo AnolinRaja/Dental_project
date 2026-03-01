@@ -1,7 +1,7 @@
-const express = require('express');
-const jwt = require('jsonwebtoken');
-const Patient = require('../models/Patient');
-const { sendPatientOtpEmail } = require('../utils/sendEmail');
+import express from 'express';
+import jwt from 'jsonwebtoken';
+import Patient from '../models/Patient.js';
+import { sendPatientOtpEmail } from '../utils/sendEmail.js';
 
 const router = express.Router();
 
@@ -300,4 +300,4 @@ router.post('/verify-otp-login', async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

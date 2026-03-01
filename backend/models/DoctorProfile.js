@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const DoctorProfileSchema = new mongoose.Schema({
   doctorEmail: {
@@ -33,4 +33,4 @@ const DoctorProfileSchema = new mongoose.Schema({
   }
 });
 
-module.exports = mongoose.model('DoctorProfile', DoctorProfileSchema);
+export default mongoose.model('DoctorProfile', DoctorProfileSchema);

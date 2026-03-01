@@ -1,7 +1,7 @@
-const express = require('express');
-const jwt = require('jsonwebtoken');
-const Message = require('../models/Message');
-const { sendContactNotificationEmail } = require('../utils/sendEmail');
+import express from 'express';
+import jwt from 'jsonwebtoken';
+import Message from '../models/Message.js';
+import { sendContactNotificationEmail } from '../utils/sendEmail.js';
 
 const router = express.Router();
 
@@ -89,4 +89,4 @@ router.put('/:id/read', async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

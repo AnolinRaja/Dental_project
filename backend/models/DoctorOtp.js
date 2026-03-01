@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const DoctorOtpSchema = new mongoose.Schema({
   email: { type: String, required: true },
@@ -7,4 +7,4 @@ const DoctorOtpSchema = new mongoose.Schema({
   expiresAt: { type: Date, required: true }
 }, { timestamps: true });
 
-module.exports = mongoose.model('DoctorOtp', DoctorOtpSchema);
+export default mongoose.model('DoctorOtp', DoctorOtpSchema);

@@ -1,6 +1,6 @@
-const express = require('express');
-const Appointment = require('../models/Appointment');
-const { sendAppointmentConfirmedEmail } = require('../utils/sendEmail');
+import express from 'express';
+import Appointment from '../models/Appointment.js';
+import { sendAppointmentConfirmedEmail } from '../utils/sendEmail.js';
 
 const router = express.Router();
 
@@ -207,4 +207,4 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;
